@@ -3,7 +3,5 @@ defmodule OEmbed.Rich do
   oEmbed Rich resource.
   """
 
-  @keys [type: "rich", html: nil, width: nil, height: nil]
-
-  use OEmbed.Resource
+  use OEmbed.Resource, keys: [type: "rich", html: nil, width: nil, height: nil]
 end

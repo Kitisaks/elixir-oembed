@@ -17,7 +17,7 @@ defmodule OEmbed.Provider do
       defp get_oembed(url) do
         with {:ok, %HTTPoison.Response{body: body}} <-
                HTTPoison.get(url, [], follow_redirect: true, ssl: [{:versions, [:"tlsv1.2"]}]),
-             {:ok, struct} <- Poison.decode(body),
+             {:ok, struct} <- Jason.decode(body),
              resource <- get_resource(struct) do
           {:ok, resource}
         else
@@ -34,5 +34,5 @@ defmodule OEmbed.Provider do
   end
 
   @callback provides?(String.t()) :: boolean
-  @callback get(String.t()) :: struct
+  @callback get(String.t()) :: {:ok, struct()} | {:error, String.t()}
 end

@@ -24,12 +24,10 @@ defmodule OEmbed do
   def for(""), do: {:error, "Empty URL"}
 
   def for(url) when is_binary(url) do
-    case Enum.find(get_providers(), fn provider -> provider.provides?(url) end) do
-      nil ->
-        {:error, "oEmbed not found"}
-
-      provider ->
-        provider.get(url)
+    if provider = Enum.find(get_providers(), fn provider -> provider.provides?(url) end) do
+      provider.get(url)
+    else
+      {:error, "oEmbed not found"}
     end
   end
 
@@ -40,6 +38,6 @@ defmodule OEmbed do
   end
 
   defp third_party_providers do
-    Application.get_env(:oembed, :providers)
+    Application.get_env(:oembed, :providers, [])
   end
 end

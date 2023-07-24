@@ -3,7 +3,5 @@ defmodule OEmbed.Photo do
   oEmbed Photo resource.
   """
 
-  @keys [type: "photo", url: nil, width: nil, height: nil]
-
-  use OEmbed.Resource
+  use OEmbed.Resource, keys: [type: "photo", url: nil, width: nil, height: nil]
 end

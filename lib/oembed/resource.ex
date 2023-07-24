@@ -3,10 +3,8 @@ defmodule OEmbed.Resource do
   oEmbed resource.
   """
 
-  defmacro __using__(_) do
+  defmacro __using__(keys: keys) do
     quote do
-      @derive [Poison.Encoder]
-
       @common_keys [
         type: nil,
         version: "1.0",
@@ -21,7 +19,9 @@ defmodule OEmbed.Resource do
         thumbnail_height: nil
       ]
 
-      defstruct Keyword.merge(@common_keys, @keys)
+      @derive Jason.Encoder
+
+      defstruct Keyword.merge(@common_keys, unquote(keys))
 
       use ExConstructor
     end

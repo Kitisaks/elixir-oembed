@@ -3,7 +3,5 @@ defmodule OEmbed.Link do
   oEmbed Link resource.
   """
 
-  @keys [type: "link"]
-
-  use OEmbed.Resource
+  use OEmbed.Resource, keys: [type: "link"]
 end

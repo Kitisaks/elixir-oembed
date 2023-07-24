@@ -3,7 +3,5 @@ defmodule OEmbed.Video do
   oEmbed Video resource.
   """
 
-  @keys [type: "video", html: nil, width: nil, height: nil]
-
-  use OEmbed.Resource
+  use OEmbed.Resource, keys: [type: "video", html: nil, width: nil, height: nil]
 end
