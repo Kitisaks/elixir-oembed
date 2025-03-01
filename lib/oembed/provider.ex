@@ -16,7 +16,7 @@ defmodule OEmbed.Provider do
 
       defp get_oembed(url) do
         with {:ok, %HTTPoison.Response{body: body}} <-
-               HTTPoison.get(url, [], follow_redirect: true, ssl: [{:versions, [:"tlsv1.2"]}]),
+               HTTPoison.get(url, [], follow_redirect: true),
              {:ok, struct} <- Jason.decode(body),
              resource <- get_resource(struct) do
           {:ok, resource}
